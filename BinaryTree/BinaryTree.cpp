@@ -1,5 +1,4 @@
 #include<stack>
-#include<fstream>
 #include "BinaryTree.h"
 
 //无参构造函数
@@ -62,12 +61,12 @@ BinTreeNode<ElemType> * BinaryTree<ElemType>::GetRoot()
 }
 //先序遍历
 template<class ElemType>
-void BinaryTree<ElemType>::PerOrder(void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::PerOrder()const
 {
-	PerOrder(root, visit);
+	PerOrder(root);
 }
 template<class ElemType>
-void BinaryTree<ElemType>::PerOrder(BinTreeNode<ElemType> *r, void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::PerOrder(BinTreeNode<ElemType> *r)const
 {
 	/*stack<ElemType> s;
 	BinTreeNode<ElemType> *p=root;
@@ -86,38 +85,44 @@ void BinaryTree<ElemType>::PerOrder(BinTreeNode<ElemType> *r, void(*visit)(const
 
 		//以栈为辅助存储结构实现二叉树的前序非递归算法
 }
+
+
 //中序遍历
 template<class ElemType>
-void BinaryTree<ElemType>::InOrder(void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::InOrder()const
 {
-	InOrder(root, visit);
+	InOrder(root);
 }
 template<class ElemType>
-void BinaryTree<ElemType>::InOrder(BinTreeNode<ElemType> *r, void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::InOrder(BinTreeNode<ElemType> *r)const
 {
 	if (r != NULL)
 	{
-		InOrder(r->leftChild, visit);
-		(*visit)(r->date);
-		InOrder(r->rightChild, visit);
+		InOrder(r->leftChild);
+		std::cout << r->date << ' ';
+		InOrder(r->rightChild);
 	}
 }
+
+
 //后序遍历
 template<class ElemType>
-void BinaryTree<ElemType>::PostOrder(void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::PostOrder()const
 {
-	PostOrder(root, visit);
+	PostOrder(root);
 }
 template<class ElemType>
-void BinaryTree<ElemType>::PostOrder(BinTreeNode<ElemType> *r, void(*visit)(const ElemType &))const
+void BinaryTree<ElemType>::PostOrder(BinTreeNode<ElemType> *r)const
 {
 	if (r != NULL)
 	{
-		PostOrder(r->leftChild, visit);
-		PostOrder(r->rightChild, visit);
-		(*visit)(r->date);
+		PostOrder(r->leftChild);
+		PostOrder(r->rightChild);
+		std::cout << r->date << ' ';
 	}
 }
+
+
 //求二叉树的高度
 template<class ElemType>
 int BinaryTree<ElemType>::Height()const
@@ -137,6 +142,8 @@ int BinaryTree< ElemType>::Height(const BinTreeNode<ElemType> *r)const
 		return (lHeight > rHeight ? lHeight : rHeight) + 1;
 	}
 }
+
+
 //求二叉树的叶子数目
 template<class ElemType>
 int BinaryTree<ElemType>::Leaf()const

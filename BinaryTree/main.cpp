@@ -1,24 +1,20 @@
 #include<iostream>
 #include"BinaryTree.cpp"
 using namespace std;
-template<class ElemType>
-void visit(const ElemType &e)
-{
-	cout << e;
-}
 int  main()
 {
 
 
 	BinaryTree<char> bin;
-	bin.CreateBinTree();//先序建立二叉树
+	cout << "输入字符串建立二叉树：";
+	bin.CreateBinTree();
 
 	cout << "输出中序遍历序列应为：";
-	bin.InOrder(visit);
+	bin.InOrder();
 	cout << endl;
 
 	cout << "输出后序遍历序列应为：";
-	bin.PostOrder(visit);
+	bin.PostOrder();
 	cout << endl;
 
 	cout << "输出二叉树的深度应为：" << bin.Height() << endl;
