@@ -9,10 +9,10 @@ LinkList<T>::LinkList()  //无参构造函数
 }
 
 template<class T>
-LinkList<T>::LinkList(T v[], int n)  //构造函数
+LinkList<T>::LinkList(T v[], int n)  
 {
 	int k;
-	for (int i = 0; i < n - 1; i++)
+	for (int i = 0; i < n - 1; i++)  //对数组v中的值进行排序
 	{
 		k = i;  //k为第i个数最小值的下标
 		for (int j = i + 1; j < n; j++)
@@ -53,12 +53,12 @@ void LinkList<T>::Clear()
 }
 
 template<class T>
-void LinkList<T>::Traverse(void(*visit)(const T &))const  //遍历链表
+void LinkList<T>::Traverse()const  //遍历链表
 {
 	Node<T> *p = head->next;
 	while (p != NULL)
 	{
-		(*visit)(p->data);
+		std::cout << p->data << " ";
 		p = p->next;
 	}
 }
@@ -67,7 +67,7 @@ template<class T>
 Status LinkList<T>::Insert(int i, const T &e)
 {
 	if (i<1 || i>length + 1)
-		return fali;
+		return fail;
 	else
 	{
 		Node<T> *p = head, *q;
@@ -84,7 +84,7 @@ template<class T>
 Status LinkList<T>::Delete(int i, T &e)
 {
 	if (i<1 || i>length + 1)
-		return fali;
+		return fail;
 	else
 	{
 		Node<T> *p = head, *q;
@@ -103,7 +103,7 @@ template<class T>
 Status LinkList<T>::Get(int i, T &e)const
 {
 	if (i<1 || i>length + 1)
-		return fali;
+		return fail;
 	else
 	{
 		Node<T> *p = head->next;
