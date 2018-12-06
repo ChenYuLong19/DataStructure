@@ -3,7 +3,10 @@
 using namespace std;
 int main()
 {
-	int v[5], arr[10], a;
+	int v[5], arr[10]; 
+	/*
+	v用来保存输入的数据，然后构造单链表
+	arr用来合并两个链表的数据*/
 	
 
 	cout << "输入第一组整数：";
@@ -33,6 +36,8 @@ int main()
 	{
 		list2.Get(i, a); arr[i + 4] = a;
 	}*/
+
+	int a;  //保存从两个链表来的值
 	for (int i = 0; i < 10; i++)//将两个链表放入一个数组中
 	{
 		if (i < 5) { list1.Get(i + 1, a); arr[i] = a; }
