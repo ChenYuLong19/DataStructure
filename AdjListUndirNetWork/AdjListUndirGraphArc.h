@@ -1,4 +1,5 @@
 #pragma once
+#include<string>
 #include<iostream>
 template<class WT>
 struct AdjListUndirGraphArc

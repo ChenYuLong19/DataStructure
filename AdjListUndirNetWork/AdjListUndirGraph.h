@@ -1,7 +1,5 @@
 #pragma once
 #include"AdjListUndirGraphVex.h"
-#include"AdjListUndirGraphArc.h"
-#include<string>
 using namespace std;
 template<class ET, class WT>
 class AdjListUndirGraph

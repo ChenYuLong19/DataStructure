@@ -1,6 +1,4 @@
 #include"AdjListUndirGraph.h"
-#include<string>
-#include<iostream>
 using namespace std;
 template<class ET, class WT>
 AdjListUndirGraph<ET, WT>::AdjListUndirGraph(ET es[], int vertexNum, int vertexMaxNum, WT infinit)
@@ -93,7 +91,7 @@ ET AdjListUndirGraph<ET, WT>::GetElem(int v)
 template<class ET, class WT>
 int AdjListUndirGraph<ET, WT>::FirstAdjVex(int v)
 {
-	if (v<0 || v>vexNum)
+	if (v<1 || v>vexNum)
 		throw Error("v不合法！");
 	if (vexTable[v - 1].firstarc == NULL)		//把这里的.换成->试一下
 		return -1;
@@ -104,9 +102,9 @@ int AdjListUndirGraph<ET, WT>::FirstAdjVex(int v)
 template<class ET, class WT>
 int AdjListUndirGraph<ET, WT>::NextAdgVex(int v1, int v2)
 {
-	if (v1<0 || v1>vexNum)
+	if (v1<1 || v1>vexNum)
 		throw Error("v1不合法！");
-	if (v2<0 || v2>vexNum)
+	if (v2<1 || v2>vexNum)
 		throw Error("v2不合法！");
 	if (v1 == v2)
 		throw Error("v1不能等于v2!");
@@ -133,9 +131,9 @@ void AdjListUndirGraph<ET, WT>::InsertVex(const ET & d)
 template<class ET, class WT>
 void AdjListUndirGraph<ET, WT>::InsertArc(int v1, int v2, WT w)
 {
-	if (v1<0 || v1>vexNum)
+	if (v1<1 || v1>vexNum)
 		throw Error("v1不合法！");
-	if (v2<0 || v2>vexNum)
+	if (v2<1 || v2>vexNum)
 		throw Error("v2不合法！");
 	if (v1 == v2)
 		throw Error("v1不能等于v2！");
@@ -159,9 +157,9 @@ void AdjListUndirGraph<ET, WT>::DeletVex(const ET & d)
 template<class ET, class WT>
 void AdjListUndirGraph<ET, WT>::DeletArc(int v1, int v2)
 {
-	if (v1<0 || v1>vexNum)
+	if (v1<1 || v1>vexNum)
 		throw Error("v1不合法！");
-	if (v2<0 || v2>vexNum)
+	if (v2<1 || v2>vexNum)
 		throw Error("v2不合法！");
 	if (v1 == v2)
 		throw Error("v1不能等于v2!");
