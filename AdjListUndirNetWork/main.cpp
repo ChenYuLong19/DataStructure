@@ -26,9 +26,12 @@ int main()
 	UndirGraph.InsertArc(2, 5, 1);
 
 	cout << "深度优先遍历无向图的输出为：" << endl;
+	UndirGraph.DeletArc(1,4);
 	UndirGraph.DFSTraverse();
 	cout << endl;
 	system("PAUSE");
 	//删除顶点还没有写
 	return 0;
 }
+/*顶点是从1开始计算，而在数组中的是从0开始的，
+所以用vexTable[]和tag[]时v要减一*/

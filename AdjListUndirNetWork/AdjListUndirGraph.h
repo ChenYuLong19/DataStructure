@@ -11,9 +11,9 @@ protected:
 	WT infinity;			//无穷大的值
 
 public:
-	AdjListUndirGraph(ET es[], int vertexNum, int vertexMaxNum /*= DEFAULIT_SIZE*/, WT infinit/* = (WT)DEFAULT_INFINITY*/);
-	//构造以数组es[]为顶点数据，顶点个数为vertexNum，允许的最大数目为vertexMaxNum，弧数为0的又向网
-	AdjListUndirGraph(int vertexMaxNum /*= DEFAULIT_SIZE*/, WT infinit/* = (WT)DEFAULIT_INFINITY*/);
+	AdjListUndirGraph(ET es[], int vertexNum, int vertexMaxNum, WT infinit);
+	//构造以数组es[]为顶点数据，顶点个数为vertexNum，允许的最大数目为vertexMaxNum，弧数为0的有向网
+	AdjListUndirGraph(int vertexMaxNum, WT infinit);
 	//构造允许的顶点最大数目为vertexMaxNum，弧数为0的有向网
 	~AdjListUndirGraph();
 	void Clear();

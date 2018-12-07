@@ -42,6 +42,7 @@ AdjListUndirGraph<ET, WT>::~AdjListUndirGraph()
 template<class ET, class WT>
 void AdjListUndirGraph<ET, WT>::Clear()
 {
+	delete[]tag;
 	delete[]vexTable;
 }
 
@@ -81,9 +82,7 @@ void AdjListUndirGraph<ET, WT>::SetTag(int v, int t)
 template<class ET, class WT>
 ET AdjListUndirGraph<ET, WT>::GetElem(int v)
 {
-	AdjListUndirGraphVex<ET, WT> e;
-	e = vexTable[v - 1];
-	return e.data;
+	return vexTable[v - 1]->data;
 }
 
 
@@ -93,10 +92,10 @@ int AdjListUndirGraph<ET, WT>::FirstAdjVex(int v)
 {
 	if (v<1 || v>vexNum)
 		throw Error("v不合法！");
-	if (vexTable[v - 1].firstarc == NULL)		//把这里的.换成->试一下
+	if (vexTable[v - 1].firstarc == NULL)		
 		return -1;
 	else
-		return vexTable[v - 1].firstarc->adjVex;	//看一下
+		return vexTable[v - 1].firstarc->adjVex;	
 }
 
 template<class ET, class WT>
@@ -150,8 +149,40 @@ void AdjListUndirGraph<ET, WT>::InsertArc(int v1, int v2, WT w)
 template<class ET, class WT>
 void AdjListUndirGraph<ET, WT>::DeletVex(const ET & d)
 {
-
+	int v;
+	for (v = 1; v <= vexNum; v++)  //查找要删除的顶点的位置v
+		if (vexTable[v - 1].data == d)
+			break;
+	if (v == vexNum)
+		throw Error("图中不存在要删除的顶点！");
+	for (int u = 1; u <= vexNum; u++)
+		if (u != v)
+			DeletArc(u, v);  //删除无向图中除了顶点v，其他顶点中到v的边
+	AdjListUndirGraphArc<WT> *p = vexTable[v - 1].firstarc;
+	while (p != NULL)
+	{
+		vexTable[v - 1].firstarc = p->nextarc;
+		delete p;
+		p = vexTable[v - 1].firstarc; //无向图中上面已经将边数减去了
+	}
 	vexNum--;
+	vexTable[v - 1].data = vexTable[vexNum].data;  //将最后一个顶点的数据放进v的位置
+	vexTable[v - 1].firstarc = vexTable[vexNum].firstarc;
+	tag[v - 1] = tag[vexNum];
+	vexTable[vexNum].firstarc = NULL;
+	for (int u = 1; u <= vexNum; u++)
+	{
+		if (u != v)
+		{
+			p = vexTable[u - 1].firstarc;
+			while (p != NULL)
+			{
+				if (p->adjVex == (vexNum + 1))
+					p->adjVex = v;
+				p = p->nextarc;
+			}
+		}
+	}
 }
 
 template<class ET, class WT>
@@ -165,12 +196,12 @@ void AdjListUndirGraph<ET, WT>::DeletArc(int v1, int v2)
 		throw Error("v1不能等于v2!");
 	AdjListUndirGraphArc<WT> *p, *q;
 	p = vexTable[v1 - 1].firstarc;  //指向删除弧节点的指针
-	while (p->adjVex != v2 && p->nextarc != NULL)  //找出v1中的弧节点
+	while (p->adjVex != v2 && p != NULL)  //找出v1中的弧节点
 	{
 		q = p;
 		p = p->nextarc;
 	}
-	if (p->nextarc != NULL)  //删除v1中的弧节点
+	if (p != NULL)  //删除v1中的弧节点
 	{
 		if (p == vexTable[v1 - 1].firstarc)  //若弧节点为第一个弧节点
 			vexTable[v1 - 1].firstarc = p->nextarc;
@@ -179,12 +210,12 @@ void AdjListUndirGraph<ET, WT>::DeletArc(int v1, int v2)
 		delete p;
 	}
 	p = vexTable[v2 - 1].firstarc;
-	while (p->adjVex != v1 && p->nextarc != NULL)  //找出v2中的弧节点
+	while (p->adjVex != v1 && p != NULL)  //找出v2中的弧节点
 	{
 		q = p;
 		p = p->nextarc;
 	}
-	if (p->nextarc != NULL)  //删除v2中的弧节点
+	if (p != NULL)  //删除v2中的弧节点
 	{
 		if (p == vexTable[v2 - 1].firstarc)  //若弧节点为第一个弧节点
 			vexTable[v2 - 1].firstarc = p->nextarc;
