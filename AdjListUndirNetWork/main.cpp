@@ -18,20 +18,26 @@ int main()
 
 	//创建一个最大顶点数为10，含有6个顶点的无向图，没有弧的顶点间权重为9999
 	AdjListUndirGraph<string, int> UndirGraph(a, 6, 10, 9999);
-	UndirGraph.InsertArc(1, 3, 1);  //建立顶点为1和3的权重为1的弧
-	UndirGraph.InsertArc(1, 4, 1);
-	UndirGraph.InsertArc(3, 4, 1);
-	UndirGraph.InsertArc(3, 6, 1);
-	UndirGraph.InsertArc(4, 6, 1);
+	//UndirGraph.InsertArc(1, 3, 1);  //建立顶点为1和3的权重为1的弧
+	//UndirGraph.InsertArc(1, 4, 1);
+	//UndirGraph.InsertArc(3, 4, 1);
+	//UndirGraph.InsertArc(3, 6, 1);
+	//UndirGraph.InsertArc(4, 6, 1);
+	//UndirGraph.InsertArc(2, 5, 1);
+
+	UndirGraph.InsertArc(0, 2, 1);
+	UndirGraph.InsertArc(0, 3, 1);
+	UndirGraph.InsertArc(2, 3, 1);
 	UndirGraph.InsertArc(2, 5, 1);
+	UndirGraph.InsertArc(3, 5, 1);
+	UndirGraph.InsertArc(1, 4, 1);
 
 	cout << "深度优先遍历无向图的输出为：" << endl;
-	UndirGraph.DeletArc(1,4);
+	UndirGraph.DFSTraverse();
+	cout << endl;
+	UndirGraph.DeletArc(0,3);
 	UndirGraph.DFSTraverse();
 	cout << endl;
 	system("PAUSE");
-	//删除顶点还没有写
 	return 0;
 }
-/*顶点是从1开始计算，而在数组中的是从0开始的，
-所以用vexTable[]和tag[]时v要减一*/
