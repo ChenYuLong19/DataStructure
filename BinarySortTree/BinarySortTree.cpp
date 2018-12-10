@@ -77,6 +77,10 @@ bool BinarySortTree<T>::Delete(const T & e)
 {
 	BinaryTreeNode<T> *f, *p;
 	p = Find(e, f);
+	if (f->leftChild == p)
+		f->leftChild = NULL;
+	else
+		f->rightChild = NULL;
 	if (p != NULL)
 	{
 		Delete(p);
@@ -93,7 +97,7 @@ void BinarySortTree<T>::Delete(BinaryTreeNode<T>*& p)
 	if (p->leftChild == NULL && p->rightChild == NULL)  //p为叶子结点
 	{
 		delete p;
-		p = NULL; /*这里没有给删除的指针复赋值，导致删除后的遍历出错----------------------*/
+		//p = NULL; /*这里没有给删除的指针复赋值，导致删除后的遍历出错----------------------*/
 	}
 	else if (p->leftChild == NULL)  //p的左子树为空
 	{
