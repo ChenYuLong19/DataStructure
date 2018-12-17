@@ -1,5 +1,7 @@
 #include<stack>
 #include "BinaryTree.h"
+#include<iostream>
+using namespace std;
 
 //无参构造函数
 template<class ElemType>
@@ -61,9 +63,24 @@ BinTreeNode<ElemType> * BinaryTree<ElemType>::GetRoot()
 }
 //先序遍历
 template<class ElemType>
-void BinaryTree<ElemType>::PerOrder()const
+void BinaryTree<ElemType>::PerOrder()const//以栈为辅助存储结构实现二叉树的前序非递归算法
 {
-	PerOrder(root);
+	stack<BinTreeNode<ElemType>*>s;
+	BinTreeNode<ElemType> *r = root;
+
+	while (r != NULL || !s.empty())
+	{
+		while (r != NULL)
+		{
+			s.push(r);
+			cout << r->data << endl;
+			r = r->leftChild;
+		}
+		r = s.top();
+		s.pop();
+		r = r->rightChild;
+
+	}
 }
 template<class ElemType>
 void BinaryTree<ElemType>::PerOrder(BinTreeNode<ElemType> *r)const
@@ -75,7 +92,7 @@ void BinaryTree<ElemType>::PerOrder(BinTreeNode<ElemType> *r)const
 		while (p)
 		{
 			s.push(*p);
-			cout << p->date();
+			cout << p->data();
 			p = p->leftChild();
 		}
 		p = s.top();
@@ -99,7 +116,7 @@ void BinaryTree<ElemType>::InOrder(BinTreeNode<ElemType> *r)const
 	if (r != NULL)
 	{
 		InOrder(r->leftChild);
-		std::cout << r->date << ' ';
+		std::cout << r->data << ' ';
 		InOrder(r->rightChild);
 	}
 }
@@ -118,7 +135,7 @@ void BinaryTree<ElemType>::PostOrder(BinTreeNode<ElemType> *r)const
 	{
 		PostOrder(r->leftChild);
 		PostOrder(r->rightChild);
-		std::cout << r->date << ' ';
+		std::cout << r->data << ' ';
 	}
 }
 

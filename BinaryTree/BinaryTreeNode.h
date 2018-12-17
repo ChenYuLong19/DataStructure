@@ -3,7 +3,7 @@
 template<class ElemType>
 struct BinTreeNode
 {
-	ElemType date;
+	ElemType data;
 	BinTreeNode<ElemType> *leftChild;
 	BinTreeNode<ElemType> *rightChild;
 
@@ -18,7 +18,7 @@ BinTreeNode<ElemType>::BinTreeNode()
 template<class ElemType>
 BinTreeNode< ElemType>::BinTreeNode(const ElemType &d, BinTreeNode< ElemType> *lChild, BinTreeNode< ElemType>*rChild)
 {
-	date = d;
+	data = d;
 	leftChild = lChild;
 	rightChild = rChild;
 }
